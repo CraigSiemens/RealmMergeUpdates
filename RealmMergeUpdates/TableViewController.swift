@@ -26,7 +26,7 @@ class TableViewController: UITableViewController {
         try! realm.write {
             realm.deleteAll()
             
-            // Create on opject that will move between sections
+            // Create an object that will move between sections
             movingModel = Model(number: 5)
             realm.add(movingModel)
             
@@ -41,6 +41,7 @@ class TableViewController: UITableViewController {
                 .forEach { realm.add($0) }
         }
         
+        // The results objects that are the source for each section
         results = [
             realm.objects(Model.self).sorted(byKeyPath: "number").filter("number < 10"),
             realm.objects(Model.self).sorted(byKeyPath: "number").filter("number >= 10")
